@@ -89,8 +89,8 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>Binaries\</OutDir>
     <IntDir>Build\</IntDir>
-    <IncludePath>E:\Future Games\Lecture projects and Assignments\Visual Studio\EmilGL\EmilGL\Libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Future Games\Lecture projects and Assignments\Visual Studio\EmilGL\EmilGL\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\repos\EmilGL\GraphicsProgramming\EmilGL\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\repos\EmilGL\GraphicsProgramming\EmilGL\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -130,7 +130,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Future Games\Lecture projects and Assignments\Visual Studio\EmilGL\EmilGL\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\repos\EmilGL\GraphicsProgramming\EmilGL\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

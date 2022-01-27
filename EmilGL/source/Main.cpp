@@ -49,30 +49,81 @@ struct Matrix
 
 const float triangleA_Data[] =
 {
-	//position			color				uv
-	-0.5f,	-0.5f,		1.f, 0.f, 0.f,		0.f, 0.f,
-	 0.5f,	-0.5f,		0.f, 1.f, 0.f,		1.f, 0.f,
-	 0.5f,	 0.5f,		0.f, 0.f, 1.f,		1.f, 1.f,
-	 -0.5f,	 0.5f,		1.f, 1.f, 1.f,		0.f, 1.f,
+	//position						uv					normals
+	-0.5f,	-0.5f,	0.f,			0.f, 0.f,			0.f, 0.f, 1.f,
+	 0.5f,	-0.5f,	0.f,			1.f, 0.f,			0.f, 0.f, 1.f,
+	 0.5f,	 0.5f,	0.f,			1.f, 1.f,			0.f, 0.f, 1.f,
+	 -0.5f,	 0.5f,	0.f,			0.f, 1.f,			0.f, 0.f, 1.f,
 };
 
 const int triangleA_Index_Data[] =
 {
 	0,1,2,
 	0,2,3,
+
+	
 };
 
-const float triangleB_Data[] =
+const float cube_Data[] =
 {
-	0.2f,	0.5f,		0.f, 0.5f, 0.f,
-	-0.3f,	0.4f,		0.f, 0.5f, 0.f,
-	 0.f,	-0.1f,		0.f, 0.f, 0.8f,
+	//position				//uv				normals
+	-0.5f, -0.5f, 0.5f,		0.f, 0.f,			0.f, 0.f, 1.f,
+	0.5f, -0.5f, 0.5f,		1.f, 0.f,			0.f, 0.f, 1.f,
+	0.5f, 0.5f, 0.5f,		1.f, 1.f,			0.f, 0.f, 1.f,
+	-0.5f, 0.5f, 0.5f,		0.f, 1.f,			0.f, 0.f, 1.f,
+
+	0.5f, -0.5f, -0.5f,		0.f, 0.f,			0.f, 0.f, -1.f,
+	-0.5f, -0.5f, -0.5f,	1.f, 0.f,			0.f, 0.f, -1.f,
+	-0.5f, 0.5f, -0.5f,		1.f, 1.f,			0.f, 0.f, -1.f,
+	0.5f, 0.5f, -0.5f,		0.f, 1.f,			0.f, 0.f, -1.f,
+
+	-0.5f, 0.5f, 0.5f,		0.f, 0.f,			0.f, 1.f, 0.f,
+	0.5f, 0.5f, 0.5f,		1.f, 0.f,			0.f, 1.f, 0.f,
+	0.5f, 0.5f, -0.5f,		1.f, 1.f,			0.f, 1.f, 0.f,
+	-0.5f, 0.5f, -0.5f,		0.f, 1.f,			0.f, 1.f, 0.f,
+
+	-0.5f, -0.5f, 0.5f,		0.f, 0.f,			0.f, -1.f, 0.f,
+	-0.5f, -0.5f, -0.5f,	1.f, 0.f,			0.f, -1.f, 0.f,
+	0.5f, -0.5f, -0.5f,		1.f, 1.f,			0.f, -1.f, 0.f,
+	0.5f, -0.5f, 0.5f,		0.f, 1.f,			0.f, -1.f, 0.f,
+
+	0.5f, -0.5f, 0.5f,		0.f, 0.f,			1.f, 0.f, 0.f,
+	0.5f, -0.5f, -0.5f,	    1.f, 0.f,			1.f, 0.f, 0.f,
+	0.5f, 0.5f, -0.5f,		1.f, 1.f,			1.f, 0.f, 0.f,
+	0.5f, 0.5f, 0.5f,		0.f, 1.f,			1.f, 0.f, 0.f,
+
+	-0.5f, -0.5f, 0.5f,		0.f, 0.f,			-1.f, 0.f, 0.f,
+	-0.5f, 0.5f, 0.5f,		1.f, 0.f,			-1.f, 0.f, 0.f,
+	-0.5f, 0.5f, -0.5f,		1.f, 1.f,			-1.f, 0.f, 0.f,
+	-0.5f, -0.5f, -0.5f,	0.f, 1.f,			-1.f, 0.f, 0.f,
 };
 
-void drawQuad(glm::mat4 transform)
+const int cube_Index_Data[] =
 {
+	//z+
+	0,1,2,
+	0,2,3,
 
-}
+	//z-
+	4,5,6,
+	4,6,7,
+
+	//y+
+	8,9,10,
+	8,10,11,
+
+	//y-
+	12,13,14,
+	12,14,15,
+
+	//x+
+	16,17,18,
+	16,18,19,
+
+	//x+
+	20,21,22,
+	20,22,23,
+};
 
 int wndHeight;
 int wndWidth;
@@ -112,11 +163,11 @@ GLuint loadMesh(const void* data, unsigned int size, const void* elementData, un
 	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, false, 7 * sizeof(float), 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, false, 8 * sizeof(float), 0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, false, 7 * sizeof(float), (void*)(2 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, false, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, false, 7 * sizeof(float), (void*)(5 * sizeof(float)));
+	glVertexAttribPointer(2, 3, GL_FLOAT, false, 8 * sizeof(float), (void*)(5 * sizeof(float)));
 
 	GLuint elementBuffer;
 	glGenBuffers(1, &elementBuffer);
@@ -183,7 +234,7 @@ GLuint loadTexture(const char* path)
 	int texHeight;
 	int texComponents;
 	stbi_uc* texPixels = stbi_load(path, &texWidth, &texHeight, &texComponents, 4);
-	flipTexture(texPixels, texWidth, texHeight, texComponents);
+	flipTexture(texPixels, texWidth, texHeight, 4);
 	//Upload from OpenGL
 	GLuint texture;
 	glGenTextures(1, &texture);
@@ -211,7 +262,7 @@ int main()
 	
 	// Load meshes!
 	GLuint triangleA = loadMesh(triangleA_Data, sizeof(triangleA_Data), triangleA_Index_Data, sizeof(triangleA_Index_Data));
-	GLuint triangleB = loadMesh(triangleB_Data, sizeof(triangleB_Data), triangleA_Index_Data, sizeof(triangleA_Index_Data));
+	GLuint cube = loadMesh(cube_Data, sizeof(cube_Data), cube_Index_Data, sizeof(cube_Index_Data));
 	glBindVertexArray(triangleA);
 
 	//load Textures
@@ -231,11 +282,12 @@ int main()
 
 	//Camera
 	Camera camera;
-	camera.position = vec3(-2.f, 1.f, 0.f);
+	camera.position = vec3(0.f, 0.f, 0.5f);
 
 	float time = 0.0f;
 	
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -260,20 +312,22 @@ int main()
 
 		//render grass
 		mat4 model;// = glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, sin(time) * 2.f));
-		model = rotate(mat4(1.f), pi<float>() / 2.f, vec3(1.f, 0.f, 0.f));
+		model = rotate(mat4(1.f), -pi<float>() / 2.f, vec3(1.f, 0.f, 0.f));
 		model = scale(model, vec3(50.f));
 
+		glBindVertexArray(triangleA);
 		glBindTexture(GL_TEXTURE_2D, textureB);
 		glUniformMatrix4fv(u_Model, 1, false, (float*)&model);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
 		//render wall
 		mat4 modelWall;// = glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, sin(time) * 2.f));
-		modelWall = translate(mat4(1.f), vec3(0.f, 0.5f, 0.f)) * rotate(mat4(1.f), time, vec3(0.f, 1.f, 0.f));
+		modelWall = translate(mat4(1.f), vec3(0.f, 2.f, 0.f)) * rotate(mat4(1.f), time, vec3(1.f, 1.f, 0.f));
 
+		glBindVertexArray(cube);
 		glBindTexture(GL_TEXTURE_2D, textureA);
 		glUniformMatrix4fv(u_Model, 1, false, (float*)&modelWall);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		glDrawElements(GL_TRIANGLES, 6*6, GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(window);
 	}
