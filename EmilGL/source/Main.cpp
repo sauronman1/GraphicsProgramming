@@ -267,7 +267,7 @@ int main()
 
 	//load Textures
 	GLuint textureA = loadTexture("textures/wall.jpg");
-	GLuint textureB = loadTexture("textures/grass.jpg");
+	GLuint textureB = loadTexture("textures/wall.jpg");
 
 	
 	// Shader stuff
@@ -279,6 +279,12 @@ int main()
 	GLint u_Projection = glGetUniformLocation(programA, "u_Projection");
 	GLint u_View = glGetUniformLocation(programA, "u_View");
 	GLint u_Time = glGetUniformLocation(programA, "u_Time");
+
+	GLint u_DirLight = glGetUniformLocation(programA, "u_DirLight");
+	vec3 directionalLight = normalize(vec3(2.f, -5.f, -1.f));
+	glUniform3fv(u_DirLight, 1, (float*)&directionalLight);
+
+	GLint u_EyePosition = glGetUniformLocation(programA, "u_EyePosition");
 
 	//Camera
 	Camera camera;
@@ -309,6 +315,7 @@ int main()
 		// view matrix
 		mat4 view = camera.getViewMatrix();
 		glUniformMatrix4fv(u_View, 1, false, (float*)&view);
+		glUniform3fv(u_EyePosition, 1, (float*)&camera.position);
 
 		//render grass
 		mat4 model;// = glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, sin(time) * 2.f));

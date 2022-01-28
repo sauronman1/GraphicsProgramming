@@ -52,7 +52,7 @@ glm::mat4 Camera::getViewMatrix()
 
 	}
 	forward = rotation * glm::vec3(1.f, 0.f, 0.f);
-	glm::vec3 center = position + forward;
+	glm::vec3 center = position + forward - glm::vec3(0.f, 5.f, 0.f);
 		
 	return glm::lookAt(position, center, glm::vec3(0.f, 1.f, 0.f));
 }
